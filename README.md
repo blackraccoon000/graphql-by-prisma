@@ -19,11 +19,20 @@ v18.12.0
 Codes/graphql-express-sdl-first »
 ```
 
+上記を参考に環境を揃える。
+
 .env ファイルを用意し、下記のように設定しておくこと。
 下記は Postgres での設定
 https://www.prisma.io/docs/concepts/database-connectors/postgresql
 
 本環境は heroku の hobby plan を使わせて頂いてる。
+下記を実行すると prisma/schema.prisma の model を参照し DB が定義される。
+
+```
+Codes/graphql-by-prisma - [adding-comment●] » prisma db push
+```
+
+下記実行で playground が立ち上がる。
 
 ```
 npm install
@@ -44,6 +53,14 @@ https://stackoverflow.com/questions/61128328/running-script-when-ts-node-dev-res
 
 ・graphql ファイルの変更漏れでうまく機能しない問題
 → 自動生成がだから必要になることがわかった。
+
+上記の説明だけだと意味がわからないので追記
+・DB への定義は schema.prisma で行う。
+・playground などの型定義は graphql/schema.graphql にて行う。
+・プログラム定義は types.ts にて定義。
+
+似たような作業を上記 3 箇所で行うことで、スキーマを定義する際にどこを設定したのかわからなくなる。
+だから、codegen のようなツールができたという経緯がわかったということ。
 
 ### 下記で DB 構造を更新した。
 
