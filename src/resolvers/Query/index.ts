@@ -2,7 +2,7 @@ import { Context } from '@src/context/types'
 import {
   PostOrderByUpdatedAtInput,
   UserUniqueInput,
-} from '@src/resolvers/types'
+} from '@src/generated/graphql'
 
 const Query = {
   selectUser: (_parent: any, args: any, context: Context) => {
