@@ -35,5 +35,9 @@
   },
   "prisma": {
     "seed": "ts-node prisma/seed.ts"
+  },
+  "volta": {
+    "node": "18.12.0",
+    "npm": "8.19.2"
   }
 }
