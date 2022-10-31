@@ -4,7 +4,7 @@ import {
   UserUniqueInput,
   PostCreateInput,
   UserCreateInput,
-} from '@src/resolvers/types'
+} from '@src/generated/graphql'
 
 const Mutation = {
   signupUser: (
@@ -100,8 +100,8 @@ const Mutation = {
         bio: args.bio,
         user: {
           connect: {
-            id: args.userUniqueInput?.id,
-            email: args.userUniqueInput?.email,
+            id: args.userUniqueInput?.id || undefined,
+            email: args.userUniqueInput?.email || undefined,
           },
         },
       },

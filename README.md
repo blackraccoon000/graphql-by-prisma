@@ -78,3 +78,48 @@ Datasource "db": PostgreSQL database "dbj5eoh37586a1", schema "public" at "ec2-4
 
 Codes/graphql-express-sdl-first »
 ```
+
+##
+
+### メモ
+
+```
+Codes/graphql-by-prisma - [graphql-cli●] » npx graphql-codegen init
+
+    Welcome to GraphQL Code Generator!
+    Answer few questions and we will setup everything for you.
+
+? What type of application are you building? Backend - API or server
+? Where is your schema?: (path or url) ./graphql/schema.graphql
+? Pick plugins: TypeScript (required by other typescript plugins), TypeScript Resolvers (strongly typed resolve functions)
+? Where to write the output: src/generated/graphql.ts
+? Do you want to generate an introspection file? Yes
+? How to name the config file? codegen.ts
+? What script in package.json should run the codegen? codegen
+Fetching latest versions of selected plugins...
+(node:56639) ExperimentalWarning: The Fetch API is an experimental feature. This feature could change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+    Config file generated at codegen.ts
+
+      $ npm install
+
+    To install the plugins.
+
+      $ npm run codegen
+
+    To run GraphQL Code Generator.
+
+Codes/graphql-by-prisma - [graphql-cli●] »
+```
+
+typescript 型定義の自動生成？
+
+```
+npm run codegen
+```
+
+### その他参考ページ
+
+おそらく middle ware が豊富な点が使用数が多い理由だと思う。
+https://github.com/graphql/express-graphql
