@@ -15,6 +15,13 @@ export const resolvers = {
         })
         .author()
     },
+    comments: (parent: any, _args: any, context: Context) => {
+      return context.prisma.post
+        .findUnique({
+          where: { id: parent?.id },
+        })
+        .comments()
+    },
   },
   User: {
     posts: (parent: any, _args: any, context: Context) => {
@@ -23,6 +30,22 @@ export const resolvers = {
           where: { id: parent?.id },
         })
         .posts()
+    },
+  },
+  Comment: {
+    post: (parent: any, _args: any, context: Context) => {
+      return context.prisma.comment
+        .findUnique({
+          where: { id: parent?.id },
+        })
+        .post()
+    },
+    author: (parent: any, _args: any, context: Context) => {
+      return context.prisma.comment
+        .findUnique({
+          where: { id: parent?.id },
+        })
+        .author()
     },
   },
 }

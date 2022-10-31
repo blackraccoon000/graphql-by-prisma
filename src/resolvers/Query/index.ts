@@ -13,6 +13,9 @@ const Query = {
   allUsers: (_parent: any, _args: any, context: Context) => {
     return context.prisma.user.findMany()
   },
+  allComments: (_parent: any, _args: any, context: Context) => {
+    return context.prisma.comment.findMany()
+  },
   postById: (_parent: any, args: { id: number }, context: Context) => {
     return context.prisma.post.findUnique({
       where: { id: args.id || undefined },

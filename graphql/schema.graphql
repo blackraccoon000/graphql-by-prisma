@@ -1,39 +1,3 @@
-type Mutation {
-  createDraft(authorEmail: String!, data: PostCreateInput!): Post
-  deletePost(id: Int!): Post
-  incrementPostViewCount(id: Int!): Post
-  signupUser(data: UserCreateInput!): User!
-  deleteUser(id: Int!): User!
-  togglePublishPost(id: Int!): Post
-  addProfileForUser(bio: String, userUniqueInput: UserUniqueInput): Profile
-}
-
-type Post {
-  author: User
-  content: String
-  createdAt: DateTime!
-  id: Int!
-  published: Boolean!
-  title: String!
-  updatedAt: DateTime!
-  viewCount: Int!
-}
-
-type Profile {
-  id: ID!
-  bio: String
-  user: User
-}
-
-input PostCreateInput {
-  content: String
-  title: String!
-}
-
-input PostOrderByUpdatedAtInput {
-  updatedAt: SortOrder!
-}
-
 type Query {
   selectUser(id: Int!): User
   allUsers: [User!]!
@@ -45,11 +9,21 @@ type Query {
     take: Int
   ): [Post!]!
   postById(id: Int): Post
+  allComments: [Comment!]!
 }
 
-enum SortOrder {
-  asc
-  desc
+type Mutation {
+  createDraft(authorEmail: String!, data: PostCreateInput!): Post
+  deletePost(id: Int!): Post
+  incrementPostViewCount(id: Int!): Post
+  signupUser(data: UserCreateInput!): User!
+  deleteUser(id: Int!): User!
+  togglePublishPost(id: Int!): Post
+  addProfileForUser(bio: String, userUniqueInput: UserUniqueInput): Profile
+  """
+  公開済みPost情報にCommentを追加する
+  """
+  createComment(data: CommentCreateInput!, postId: Int!): Comment
 }
 
 type User {
@@ -63,18 +37,62 @@ type User {
   profile: Profile
 }
 
+type Post {
+  id: Int!
+  author: User
+  content: String
+  createdAt: DateTime!
+  published: Boolean!
+  title: String!
+  updatedAt: DateTime!
+  viewCount: Int!
+  comments: [Comment!]!
+}
+
+type Profile {
+  id: ID!
+  bio: String
+  user: User
+}
+
+type Comment {
+  id: ID!
+  text: String
+  author: User!
+  post: Post!
+}
+
 input UserCreateInput {
   email: String!
   name: String
   age: Int
   memo: String
   posts: [PostCreateInput!]
+  comments: [CommentCreateInput!]
+}
+
+input PostCreateInput {
+  content: String
+  title: String!
+}
+
+input CommentCreateInput {
+  text: String!
+}
+
+input PostOrderByUpdatedAtInput {
+  updatedAt: SortOrder!
 }
 
 input UserUniqueInput {
   id: Int
   # id: ID! @unique
   email: String
+}
+
+enum SortOrder {
+  asc
+  desc
 }
 
 scalar DateTime

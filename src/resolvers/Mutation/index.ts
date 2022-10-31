@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from 'uuid'
 import { Context } from '@src/context/types'
 import {
   UserUniqueInput,
@@ -14,9 +15,6 @@ const Mutation = {
     const postData = args.data.posts?.map((post) => {
       return { title: post.title, content: post.content || undefined }
     })
-
-    console.log('age:', args.data.age)
-
     return context.prisma.user.create({
       data: {
         name: args.data.name,
@@ -108,6 +106,44 @@ const Mutation = {
         },
       },
     })
+  },
+  /**
+   * 公開フラグ publishedがtrueの場合のみコメントがつけられる
+   * @param _parent
+   * @param args
+   * @param context
+   * @returns
+   */
+  createComment: async (
+    _parent: any,
+    args: {
+      data: {
+        text: string
+      }
+      postId: number
+    },
+    context: Context,
+  ) => {
+    const post = await context.prisma.post.findUnique({
+      where: { id: args.postId },
+    })
+
+    if (!post?.published) {
+      throw new Error('post publish flag is false!')
+    } else {
+      return context.prisma.comment.create({
+        data: {
+          id: uuidv4(),
+          text: args.data.text,
+          post: {
+            connect: { id: args.postId },
+          },
+          author: {
+            connect: { id: post.authorId || undefined },
+          },
+        },
+      })
+    }
   },
 }
 
