@@ -122,4 +122,11 @@ npm run codegen
 ### その他参考ページ
 
 おそらく middle ware が豊富な点が使用数が多い理由だと思う。
+
+https://npmtrends.com/@graphql-codegen/cli-vs-apollo-vs-graphql-cli
+
 https://github.com/graphql/express-graphql
+
+### 後で読む
+
+https://www.prisma.io/docs/concepts/components/prisma-client/null-and-undefined#use-case-null-and-undefined-in-a-graphql-resolver

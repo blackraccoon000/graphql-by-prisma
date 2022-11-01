@@ -14,6 +14,7 @@ type Query {
 
 type Mutation {
   createDraft(authorEmail: String!, data: PostCreateInput!): Post
+  updatePost(id: Int!, data: PostUpdateInput!): Post
   deletePost(id: Int!): Post
   incrementPostViewCount(id: Int!): Post
   signupUser(data: UserCreateInput!): User!
@@ -72,8 +73,20 @@ input UserCreateInput {
 }
 
 input PostCreateInput {
-  content: String
   title: String!
+  content: String
+  published: Boolean!
+}
+
+input PostUpdateInput {
+  title: String
+  content: String
+  published: Boolean
+}
+
+input PostCreateDraftInput {
+  title: String!
+  content: String
 }
 
 input CommentCreateInput {
